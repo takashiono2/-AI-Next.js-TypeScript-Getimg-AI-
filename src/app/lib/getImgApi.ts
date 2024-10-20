@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 type FetchMonsterImgParams = {
-  description: string,
-  attribute: string
+  description: string;
+  attribute: string;
 }
 export default async function fetchMonsterImg({
   description,
@@ -16,16 +16,16 @@ export default async function fetchMonsterImg({
     headers: {
       accept: 'application/json',
       'content-type': 'application/json',
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_GETIMG_API_KEY}`,
+      authorization: `Bearer ${process.env.NEXT_PUBLIC_GETIMG_API_KEY}`,
     },
     data: { prompt, steps: 1, response_format: 'url' }
   };
-  debugger;
+
   try {
     const response = await axios.request(options);
     return response.data.url || '';
   } catch (error) {
-    console.error('画像発生にエラーが生じました', error);
+    console.error('画像生成時にエラーが発生しました', error);
     return '';
   }
 }
